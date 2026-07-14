@@ -45,20 +45,20 @@ O Sénate Couture é um sistema de e-commerce que combina uma vitrine de moda co
     Formulário para cadastrar novos colaboradores no sistema com definição de função (ex: Gerente, Vendedor).
 
 Estrutura do Projeto
-
-├── index.html                   # Página pública da loja (Vitrine)
+```text
+├── index.html                  # Página pública da loja (Vitrine)
 ├── database/
-│   └── DB_PI2.db                # Arquivo do banco de dados SQLite
+│   └── DB_PI2.db               # Arquivo do banco de dados SQLite
 ├── public/
-│   ├── acesso.html              # Atalhos do painel administrativo
-│   ├── conexao/conexao.php      # Conexão centralizada via PDO
-│   ├── Login_PI2/login.php      # Autenticação de usuários
-│   ├── estoque/                 # Controle de estoque (estoque.php)
-│   ├── adcProdutos/             # CRUD de produtos 
-│   ├── categorias/              # Gestão de categorias
-│   └── pagCriarUsuario/         # Cadastro de novos colaboradores
-└── assets/                      # Arquivos estáticos (CSS e JS)
-
+│   ├── acesso.html             # Atalhos do painel administrativo
+│   ├── conexao/conexao.php     # Conexão centralizada via PDO
+│   ├── Login_PI2/login.php     # Autenticação de usuários
+│   ├── estoque/                # Controle de estoque (estoque.php)
+│   ├── adcProdutos/            # CRUD de produtos 
+│   ├── categorias/             # Gestão de categorias
+│   └── pagCriarUsuario/        # Cadastro de novos colaboradores
+└── assets/                     # Arquivos estáticos (CSS e JS)
+```
 Como Executar o Projeto
 
 Siga os passos abaixo para rodar a aplicação no seu computador:
