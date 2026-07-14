@@ -1,58 +1,103 @@
-Sénate Couture - Sistema de Gerenciamento de E-Commerce
+Sénate Couture - Sistema de E-Commerce e Gestão
 
-Este é um sistema completo de e-commerce e retaguarda administrativa focado no setor de moda, desenvolvido com **PHP Estruturado**, **Banco de Dados SQLite 3** e uma interface interativa com **Vanilla JavaScript** e **CSS3**. 
+O Sénate Couture é um sistema de e-commerce que combina uma vitrine de moda com um painel administrativo completo para gerenciamento de estoque, produtos, categorias e funcionários.
 
-O projeto contempla desde a vitrine pública para os consumidores finais até um ecossistema administrativo restrito para controle de acessos, gestão física de stock, categorização e cadastro de novos colaboradores.
+1. Vitrine Pública (index.html)
 
-Tecnologias Utilizadas
+    Página inicial elegante com apresentação da marca.
 
-    Backend: PHP 8.x (Estruturado com uso rigoroso de PDO e Controle de Sessão).
+    Destaques de categorias (Feminino e Masculino).
 
-    Frontend: HTML5, CSS3 (Responsividade com CSS Grid e Flexbox), Vanilla JavaScript (comunicando assincronamente com APIs internas do PHP usando Fetch API).
+    Botão de acesso rápido para a administração.
 
-    Banco de Dados: SQLite 3 (DB_PI2.db) para armazenamento rápido de arquivos relacionais.
+2. Controle de Acesso (login.php)
 
-    Bibliotecas Visuais: Boxicons (módulo de categorias) e Font Awesome 6.0 (painel de acessos).
+    Tela de autenticação protegida para colaboradores.
 
-    Lógica e Arquitetura do Banco de Dados (DB_PI2.db)
+    Validação de credenciais de e-mail e senha diretamente no banco de dados.
 
-O banco de dados foi estruturado de forma relacional para garantir a integridade das entidades do sistema. Abaixo está a modelagem conceitual utilizada:
+    Início de sessão seguro via PHP Session.
 
-Tabelas Principais e Campos Chave:
+3. Painel Administrativo (acesso.html)
 
-    Produtos: ID_Produtos, Nome, Preco, ID_Categorias (FK), ID_Cores (FK), ID_Tamanhos (FK), Qtd.
+    Painel centralizador com atalhos funcionais e intuitivos para os módulos do sistema.
 
-    Categorias: ID_Categorias, Nome.
+4. Gerenciamento de Produtos (adcionarProdutos.php)
 
-    Cores: ID_Cores, Nome, Rgb.
+    Criação, edição e exclusão (CRUD) de produtos em tempo real usando JavaScript assíncrono (Fetch API).
 
-    Tamanhos: ID_Tamanhos, Nome.
+    Upload de imagens armazenadas de forma segura diretamente no banco de dados como dados binários (BLOB).
 
-    Produto_Img: ID_Img, ID_Produtos (FK), Arquivo (BLOB), Img_Principal (Boolean).
+5. Gestão de Categorias (categoria.php)
 
-    usuarios: id, nome, sobrenome, nascimento, email, senha, sexo, funcao.
+    Painel para criar e excluir categorias.
 
-    Regras de Acesso e Sessões (login.php)
+    Exibição de um contador relacional de quantos produtos pertencem a cada categoria.
 
-    Autenticação segura: O arquivo login.php valida o e-mail e a senha fornecidos contra a tabela usuarios.
+6. Auditoria de Estoque (estoque.php)
 
-    Armazenamento em Sessão: Ao validar as credenciais, os dados do funcionário são registrados na superglobal $_SESSION['usuario'].
+    Página que lê de forma dinâmica todas as tabelas do SQLite.
 
-    Redirecionamento: Após o login bem-sucedido, o usuário é transferido para a central administrativa acesso.html.
+    Permite visualizar e editar registros diretamente em formato de tabela.
 
-    Como Executar o Projeto Localmente
+7. Cadastro de Funcionários (criaUsuario.php)
 
-    Ative o SQLite no seu Ambiente PHP:
-    Certifique-se de abrir o arquivo php.ini do seu servidor local e verificar se as seguintes linhas não possuem o caractere ; na frente (estão ativas):
+    Formulário para cadastrar novos colaboradores no sistema com definição de função (ex: Gerente, Vendedor).
 
-    Copie o projeto para o seu diretório web:
-Insira a pasta raiz no diretório de leitura do seu servidor local (ex: a pasta htdocs do XAMPP ou a pasta pública do Laragon).
+Estrutura do Projeto
 
-Inicie o Servidor:
-Você também pode simplesmente iniciar o servidor integrado do PHP executando o comando abaixo no terminal de comandos dentro do diretório raiz do projeto:
+├── index.html                   # Página pública da loja (Vitrine)
+├── database/
+│   └── DB_PI2.db                # Arquivo do banco de dados SQLite
+├── public/
+│   ├── acesso.html              # Atalhos do painel administrativo
+│   ├── conexao/conexao.php      # Conexão centralizada via PDO
+│   ├── Login_PI2/login.php      # Autenticação de usuários
+│   ├── estoque/                 # Controle de estoque (estoque.php)
+│   ├── adcProdutos/             # CRUD de produtos 
+│   ├── categorias/              # Gestão de categorias
+│   └── pagCriarUsuario/         # Cadastro de novos colaboradores
+└── assets/                      # Arquivos estáticos (CSS e JS)
 
-Navegue:
+Como Executar o Projeto
 
-    Abra seu navegador e digite: http://localhost:8080/index.html para ver a vitrine da loja.
+Siga os passos abaixo para rodar a aplicação no seu computador:
+Passo 1: Pré-requisitos
 
-    Acesse a retaguarda administrativa através da rota: http://localhost:8080/public/Login_PI2/login.php.
+Certifique-se de ter instalado em sua máquina:
+
+    PHP (versão 8.0 ou superior).
+
+Passo 2: Ativar o SQLite no PHP
+
+O banco de dados do projeto utiliza SQLite, por isso você precisa habilitar a extensão nas configurações do seu PHP:
+
+    Abra o arquivo de configuração do PHP chamado php.ini.
+
+    Procure pelas seguintes linhas e remova o ponto e vírgula (;) do início delas para ativá-las:
+    Ini, TOML
+
+    extension=pdo_sqlite
+    extension=sqlite3
+
+    Salve o arquivo.
+
+Passo 3: Iniciar o Servidor Local
+
+    Abra o seu terminal de comandos (cmd, bash ou o terminal do VS Code).
+
+    Navegue até a pasta raiz do projeto:
+    Bash
+
+    cd caminho/para/o/seu/projeto
+
+    Inicie o servidor embutido do PHP:
+    Bash
+
+    php -S localhost:8080
+
+Passo 4: Acessar a Aplicação
+
+    Para ver a Vitrine Pública (Loja): Abra o navegador e acesse http://localhost:8080/index.html.
+
+    Para acessar a Área Administrativa: Acesse diretamente http://localhost:8080/public/Login_PI2/login.php.
